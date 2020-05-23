@@ -19,7 +19,7 @@
 				<button type="submit" value="acessar" >Acessar</button>
 			</form>
 		</div>
-		<center><h3>Formação Java Web</h3></center>
+		<center><h3>Formação Java Web - JDev Treinamento</h3></center>
 	</div>
 </body>
 </html>
