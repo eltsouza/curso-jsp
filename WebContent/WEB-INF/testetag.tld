@@ -1,0 +1,12 @@
+<taglib> 
+     <tlibversion>1.0</tlibversion> 
+     <jspversion>2.0-</jspversion> 
+     <shortname>Custom Tag</shortname> 
+     <info>Minhas Tag's Customizadas</info>
+     <tag> 
+          <name>MinhaTag</name> 
+          <tagclass>tag.TagCursoJSP</tagclass>           
+          <bodycontent>empty</bodycontent> 
+          <info>Mostra a hora atual do sistema em formato longo</info>      
+          </tag> 
+</taglib>
