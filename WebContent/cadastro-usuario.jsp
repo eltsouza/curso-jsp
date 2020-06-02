@@ -6,15 +6,14 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+	function hideURLbar(){ window.scrollTo(0,1); } </script>
+	
   <title>Cadastro Usuários</title>
-  <style type="text/css">
-    #divCenter { 
-				align-content: center;
-				height: 20%;
-				width: 111%; }
-  </style>  
-  <link rel="stylesheet" type="text/css" href="resources/css/cadastro.css">
   
+  <link rel="stylesheet" type="text/css" href="resources/css/usuario.css">
+ 
   <!-- Adicionando JQuery -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
           integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -23,173 +22,238 @@
 <body>
   <a href="acesso-liberado-servlets.jsp"><img src="resources/img/home.png" alt="Inicio" title="Inicio" width="40px" height="40px"></a>
   <a href="index-servlets.jsp"><img src="resources/img/logout.png" alt="Logout" title="Logout" width="40px" height="40px"></a>
-  <form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false"  enctype="multipart/form-data" >
-    <ul class="form-style-1">
-	  <li>
-	    <h1><center>Cadastro de usuários</center></h1>
-	    <h3 style="color: red">${msg}</h3>
-	    <table>
-		  <tr>
-		    <td>Codigo:</td>
-			<td><input type="text" readonly="readonly" name="id" class="field-long" value="${user.id}"></td>
-			<td>Cep:</td>
-			<td><input type="text" id="cep" name="cep" onblur="consultaCep();" value="${user.cep}" placeholder="Informe o cep"></td>			
-		  </tr>
-  		  <tr>
-		    <td>Login:</td>
-			<td><input type="text" id="login" name="login" class="field-long" value="${user.login}" placeholder="Informe o login" maxlength="10"></td>
-			<td>Rua:</td>
-			<td><input type="text" id="rua" name="rua" readonly="readonly" value="${user.rua}"></td>
-		  </tr>
-  	      <tr>
-		    <td>Senha:</td>
-			<td><input type="password" id="senha" name="senha" class="field-long" value="${user.senha}" placeholder="Informe a senha"></td>
-		    <td>Bairro:</td>
-			<td><input type="text" id="bairro" name="bairro" readonly="readonly" value="${user.bairro}"></td>
-		  </tr>
-          <tr>
-		    <td>Nome:</td>
-			<td><input type="text" id="nome" name="nome" class="field-long" value="${user.nome}" placeholder="Informe o nome"></td>
-		    <td>Cidade:</td>
-			<td><input type="text" id="cidade" name="cidade" readonly="readonly" value="${user.cidade}"></td>
-		  </tr>
-          <tr>
-		    <td>UF:</td>
-			<td><input type="text" id="estado" name="estado" readonly="readonly" value="${user.estado}"></td>
-			<td>IBGE:</td>
-			<td><input type="text" id="ibge" name="ibge" readonly="readonly" value="${user.ibge}"></td>
-		  </tr>
-		  <td>Ativo:</td>
-		  <td><input type="checkbox" id="ativo" name="ativo"  required=true
-		  <% 
-			if (request.getAttribute("user") != null) {
-				BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-				if (user.isAtivo()){
-					out.print(" ");
-					out.print("checked=\"checked\"");
-					out.print(" ");
+	<!--header-->
+	<div class="agile-header"></div>
+	<!--//header-->
+	<!--main-->
+	<div class="agileits-main">
+		<div class="wrap">
+		<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false"  enctype="multipart/form-data" >
+            <h1><center>Cadastro de usuários</center></h1>
+            <br><br>
+	        <center><h3 style="color: red">${msg}</h3></center>
+            <br><br>
+			<ul>
+				<li class="text">Código  :</li>
+				<li><input type="text" readonly="readonly" name="id" class="field-long" placeholder="Código gerado automaticamente" value="${user.id}"></li>
+			</ul>
+			<ul>
+				<li class="text">Nome  :  </li>
+				<li><input type="text" id="nome" name="nome" class="field-long" value="${user.nome}" placeholder="Informe o nome"></li>
+			</ul>
+			<ul>
+				<li class="text">Login  :  </li>
+				<li><input type="text" id="login" name="login" class="field-long" value="${user.login}" placeholder="Informe o login" maxlength="10"></li>
+	   		    <li class="password">Senha  :  </li>
+				<li><input type="password" id="senha" name="senha" class="field-long" value="${user.senha}" placeholder="Informe a senha"></li>
+			</ul>
+			<ul>
+				<li class="text">Cep  :  </li>
+				<li><input type="text" id="cep" name="cep" onblur="consultaCep();" value="${user.cep}" placeholder="Informe o cep"></li>
+			</ul>
+			<ul>
+				<li class="text">Rua:  </li>
+				<li><input type="text" id="rua" name="rua" readonly="readonly" value="${user.rua}"></li>
+			</ul>
+			<ul>
+				<li class="text">Bairro  :  </li>
+				<li><input type="text" id="bairro" name="bairro" readonly="readonly" value="${user.bairro}"></li>
+			</ul>
+			<ul>
+				<li class="text">Cidade  :  </li>
+				<li><input type="text" id="cidade" name="cidade" readonly="readonly" value="${user.cidade}"></li>
+			</ul>
+			<ul>
+				<li class="text">UF  :  </li>
+				<li><input type="text" id="estado" name="estado" readonly="readonly" value="${user.estado}"></li>
+			</ul>
+			<ul>
+				<li class="text">IBGE  :  </li>
+				<li><input type="text" id="ibge" name="ibge" readonly="readonly" value="${user.ibge}"></li>
+			</ul>
+			<ul>
+				<li class="checkbox">Ativo  :  </li>
+				<li><input type="checkbox" id="ativo" name="ativo"  required=true
+	                  <% 
+	                	if (request.getAttribute("user") != null) {
+	                		BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+	                		if (user.isAtivo()){
+	                			out.print(" ");
+	                			out.print("checked=\"checked\"");
+	                			out.print(" ");
+	                		}
+	                	}						 
+	                  %>
+		            >
+				</li>
+			</ul>
+			<ul>
+				<li class="radio">Sexo  :  </li>
+				<li><input type="radio" name="sexo" required=true						 
+			            <% 
+			            	if (request.getAttribute("user") != null){
+  			                	BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+			            		if (user.getSexo().equalsIgnoreCase("masculino")){
+			            			out.print(" ");
+			            			out.print("checked=\"checked\"");
+			            			out.print(" ");
+			            		}
+			            	}
+			            %>
+			            			 
+			            value="masculino">Masculino</input>
+			            			  
+			            <input type="radio" name="sexo" 
+			                <% 
+			                	if (request.getAttribute("user") != null){
+			                	   BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+			                	   if (user.getSexo().equalsIgnoreCase("feminino")){
+			                		  out.print(" ");
+			                		  out.print("checked=\"checked\"");
+			                		  out.print(" ");
+			                	   }
+			                   }
+			                %>
+   		              value="feminino">Feminino</input>
+				</li>
+			</ul>
+			<ul>
+				<li class="arquivo">Foto  : </li>
+				<li><input type="file" name="foto"></li>
+			</ul>
+			<ul>
+				<li class="arquivo">Currículo  : </li>
+				<li><input type="file" name="curriculo"></li>
+			</ul>
+			<ul>
+				<li class="select">Perfil  : </li>
+				<li> <select id="perfil" required name="perfil" style="width: 100px;height: 20px;">
+				  	 <option value="nao_informado">[--Selecione--] </option>					 	 	
+				 	 <option value="admistrador"
+					    <% 
+					    	if (request.getAttribute("user") != null) {
+					    				
+					    		BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+					    		if (user.getPerfil().equalsIgnoreCase("admistrador")){
+					    			out.print(" ");
+					    			out.print("selected=\"selected\"");
+					    			out.print(" ");
+					    		}
+					    	}						 
+					    %>
+					 >Administrador</option >
+					 		 	
+					 <option value="secretario"   
+					    <% 
+					    	if (request.getAttribute("user") != null) {
+					    				
+					    		BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+					    		if (user.getPerfil().equalsIgnoreCase("secretario")){
+					    			out.print(" ");
+					    			out.print("selected=\"selected\"");
+					    			out.print(" ");
+					    		}
+					    	}						 
+					    %>
+					  >Secretário(a)</option >
+					 		 	
+					 <option value="gerente"  
+					    <% 
+					    	if (request.getAttribute("user") != null) {
+					    				
+					    		BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+					    		if (user.getPerfil().equalsIgnoreCase("gerente")){
+					    			out.print(" ");
+					    			out.print("selected=\"selected\"");
+					    			out.print(" ");
+					    		}
+					    	}						 
+					    %>
+					 		 	
+					 >Gerente</option >
+					 	 	
+					 <option value="funcionario" 
+					    <% 
+					    	if (request.getAttribute("user") != null) {
+					    				
+					    		BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+					    		if (user.getPerfil().equalsIgnoreCase("funcionario")){
+					    			out.print(" ");
+					    			out.print("selected=\"selected\"");
+					    			out.print(" ");
+					    		}
+					    	}						 
+				        %>
+					 		 	
+					 >Funcionário</option >
+			      </select>	
+				</li>
+			</ul>
+		    
+
+			
+			<div class="clear"></div>
+			<div class="agile-submit">
+				<input type="submit" value="Salvar"> 
+				<input type="submit" value="Cancelar" onclick="document.getElementById('formUser').action = 'salvarUsuario?acao=reset'">
+			</div>
+			</form>
+		</div>	
+	</div>
+	<!--//main-->
+	<script type="text/javascript">
+			function validarCampos() {	
+				if (document.getElementById("login").value ==''){
+					alert('Campo login está vazio.');
+					return false;
 				}
-			}						 
-		  %>
-		 >
-		 </td>
-		 <td>Sexo:</td>
-		 <td>
-		 	<input type="radio" name="sexo" required=true
-						 
-			<% 
-				if (request.getAttribute("user") != null){
-  			    	BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-					if (user.getSexo().equalsIgnoreCase("masculino")){
-						out.print(" ");
-						out.print("checked=\"checked\"");
-						out.print(" ");
-					}
+				else
+				if (document.getElementById("senha").value ==''){
+					alert('Campo senha está vazio.');
+					return false;
 				}
-			%>
-						 
-			value="masculino">Masculino</input>
-						  
-			<input type="radio" name="sexo" 
-			<% 
-				if (request.getAttribute("user") != null){
-				   BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-				   if (user.getSexo().equalsIgnoreCase("feminino")){
-					  out.print(" ");
-					  out.print("checked=\"checked\"");
-					  out.print(" ");
-				   }
-			   }
-			%>
-   		    value="feminino">Feminino</input>						 
-		  </td>	
-          <tr>
-		  	<td>Foto:</td>
-		  	<td>
-		  	    <input type="file" name="foto">
-		        <!-- <input type="text" style="display: none;" name="fotoTemp" readonly="readonly" value="${user.fotobase64}"/>
-		  	    <input type="text" style="display: none;" name="contentTypeTemp" readonly="readonly" value="${user.contenttype}"/>-->
-		  	    		  <td>Perfil:</td>
-			   <td>
-				  <select id="perfil" required name="perfil" style="width: 175px;height: 30px;">
-				 	<option value="nao_informado">[--SELECIONE--] </option>
-						 	
-				 	<option value="admistrador"
-					<% 
-						if (request.getAttribute("user") != null) {
-									
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getPerfil().equalsIgnoreCase("admistrador")){
-								out.print(" ");
-								out.print("selected=\"selected\"");
-								out.print(" ");
-							}
-						}						 
-					%>
-					>Administrador</option >
-							 	
-					<option value="secretario"   
-					<% 
-						if (request.getAttribute("user") != null) {
-									
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getPerfil().equalsIgnoreCase("secretario")){
-								out.print(" ");
-								out.print("selected=\"selected\"");
-								out.print(" ");
-							}
-						}						 
-					%>
-					>Secretário(a)</option >
-							 	
-					<option value="gerente"  
-					<% 
-						if (request.getAttribute("user") != null) {
-									
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getPerfil().equalsIgnoreCase("gerente")){
-								out.print(" ");
-								out.print("selected=\"selected\"");
-								out.print(" ");
-							}
-						}						 
-					%>
-							 	
-					>Gerente</option >
-						 	
-					<option value="funcionario" 
-					<% 
-						if (request.getAttribute("user") != null) {
-									
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getPerfil().equalsIgnoreCase("funcionario")){
-								out.print(" ");
-								out.print("selected=\"selected\"");
-								out.print(" ");
-							}
-						}						 
-				    %>
-							 	
-					>Funcionário</option >
-			     </select>						 
-				</td>		  
-		  	</td>		  
-		  </tr>
-		  <tr>
-		  	<td>Currículo:</td>
-		  	<td><input type="file" name="curriculo"></td>		  
-	    <!--<input type="text" style="display: none;" name="curriculoTemp" readonly="readonly" value="${user.curriculobase64}"/>
-		  	<input type="text" style="display: none;" name="contentTypeCurriculoTemp" readonly="readonly" value="${user.contenttypecurriculo}"/>-->
-		  </tr>		  
-      	  <tr>
-		    <td></td>
-		    <td><input type="submit" value="Salvar"> <input type="submit" value="Cancelar" onclick="document.getElementById('formUser').action = 'salvarUsuario?acao=reset'"></td>
-		  </tr>
-		</table>
-	  </li>
-	</ul>
-  </form>
-  <div id="divCenter">
+				else
+				if (document.getElementById("nome").value ==''){
+					alert('Campo nome está vazio.');
+					return false;
+				}
+				else
+				if (document.getElementById("fone").value ==''){
+					alert('Campo telefone está vazio.');
+					return false;
+				}else
+				return true; 
+		}
+	 	function consultaCep(){
+			var cep = $("#cep").val();
+		
+			//Consulta o webservice viacep.com.br/
+			$.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+			
+			//alert(dados.logradouro);	
+				
+			if (!("erro" in dados)) {
+				//Atualiza os campos com os valores da consulta.
+				$("#rua").val(dados.logradouro);
+				$("#bairro").val(dados.bairro);
+				$("#cidade").val(dados.localidade);
+				$("#estado").val(dados.uf);
+				$("#ibge").val(dados.ibge);
+			} //end if.
+			else {
+			  //CEP pesquisado não foi encontrado.
+			  alert("CEP não encontrado.");
+			  $("#rua").val('');
+			  $("#bairro").val('');
+			  $("#cidade").val('');
+			  $("#uf").val('');
+			  $("#ibge").val('');          
+		   }
+		 });
+	   }
+			
+		</script>
+  <div class="divCenter" id="divCenter">
 	  <form method="post" action="servletPesquisa" style="width: 90%" text-align: center;>
 		<ul class="form-style-1">
 				<li>
