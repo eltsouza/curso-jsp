@@ -3,7 +3,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
+
 	<head>
 	    <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +14,9 @@
 	    <link href="resources/css/style.css" rel="stylesheet">
 	
 	</head>
+
 	<body>
+
     <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -24,11 +27,11 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="#">
-                    <b class="logo-abbr"><img src="resources/images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="resources/images/logo.png"  alt=""></span>
+                <a href="index.html">
+                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="resources/images/logo.png" height="60px" width="200px" alt="">
+                        <img src="images/logo-text.png" alt="">
                     </span>
                 </a>
             </div>
@@ -53,7 +56,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="resources/images/user/perfil.jpg" height="40" width="40" alt="">
+                                <img src="images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -87,8 +90,8 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Cadastros</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="cadastro-usuario.jsp">Usuários</a></li>
-                            <li><a href="cadastro-produto.jsp">Produtos</a></li>
+                            <li><a href="./cadastro.html">Usuários</a></li>
+                            <li><a href="./index.html">Produtos</a></li>
 
                         </ul>
                     </li>
@@ -266,7 +269,7 @@
                                             </label>
                                             <div class="col-lg-8">
                                                 <label class="css-control css-control-primary css-checkbox" for="ativo">
-                                                    <input type="checkbox" id="ativo" name="ativo" class="css-control-input"
+                                                    <input type="checkbox" id="ativo" name="ativo" class="css-control-input" value="1"
 													    <% 
 			                                              if (request.getAttribute("user") != null) {
 			                                              	BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
@@ -332,174 +335,76 @@
         <!--**********************************
             Content body end
         ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by Souza Consultória<a href="#"> JDev Treinamento</a> 2020</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
     </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->
-  <div id="divCenter">
-	  <form method="post" action="servletPesquisa" style="width: 90%" text-align: center;>
-		<ul class="form-style-1">
-				<li>
-					<table>
-					  <tr>
-					   <td>Descrição</td>
-					   <td><input type="text"  id="descricaoconsulta" name="descricaoconsulta"></td>
-					   <td><input type="submit" value="Pesquisar"></td>
-					  </tr>
-					</table>
-			   </li>
-			</ul>
-	  </form>	 
-  </div> 
-  <!--**********************************
-            Content body start
-        ***********************************-->
-        <div class="content-body">
-            <!-- row -->
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Lista de Usuários</h4>
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered zero-configuration">
-                                        <thead>
-                                            <tr>
-		                                       <th>Código</th>
-		                                       <th>Login</th>
-		                                       <th>Foto</th>
-		                                       <th>Documento</th>
-		                                       <th>Nome</th>
-		                                       <th>Cep</th>
-		                                       <th>Rua</th>
-		                                       <th>Cidade</th>
-		                                       <th>Bairro</th>
-		                                       <th>Exluir</th>
-		                                       <th>Editar</th>
-		                                       <th>Fones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-	                                        <c:forEach items="${usuarios}" var="user">
-   	                                              <tr>
-													  <td><c:out value="${user.id}"></c:out></td>
-													  <td><c:out value="${user.login}"></c:out></td>
-													  <c:if test="${user.fotobase64miniatura.isEmpty() == false}">
-													  
-														  <td>
-															<a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}">
-															   <img src='<c:out value="${user.fotobase64miniatura}"/>' alt="Imagem User" title="Imagem User" width="32px" height="32px">
-															</a>
-														  </td>
-													  </c:if>	
-													  <c:if test="${user.fotobase64miniatura == null}">
-														  <td><img alt="Imagem User" src="resources/img/userpadrao.png" width="32px" height="32px" onclick="alert('Não possui imagem')"> </td>
-													  </c:if>
-													  <c:if test="${user.curriculobase64.isEmpty() == false}">	
-														  <td><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img alt="Curriculo" src="resources/img/pdf.png" width="32px" height="32px"></a></td>
-													  </c:if>
-													  <c:if test="${user.curriculobase64 == null}">
-														 <td><img alt="Curriculo" src="resources/img/pdfNotFound.png" width="32px" height="32px" onclick="alert('Não possui curriculo')"></td>
-													  </c:if>
-													  <td><c:out value="${user.nome}"></c:out></td>
-													  <td><c:out value="${user.cep}"></c:out></td>
-													  <td><c:out value="${user.rua}"></c:out></td>
-													  <td><c:out value="${user.bairro}"></c:out></td>
-													  <td><c:out value="${user.cidade}"></c:out></td>
-													  <td><a href="salvarUsuario?acao=delete&user=${user.id}" onclick="return confirm('Confirmar a exclusão?');"><img src="resources/img/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px"></a></td>
-													  <td><a href="salvarUsuario?acao=editar&user=${user.id}"><img src="resources/img/editar.png" alt="Alterar" title="Editar" width="20px" height="20px"></a></td>
-													  <td><a href="salvarTelefones?acao=addFone&user=${user.id}"><img src="resources/img/telefone.png" alt="Telefones" title="Telefones" width="20px" height="20px"></a></td>
-  	                                              </tr>
-	                                             </c:forEach>
-                                            <tfoot>
-                                            <tr>
-	                                          <th>Código</th>
-	                                          <th>Login</th>
-	                                          <th>Foto</th>
-	                                          <th>Documento</th>
-	                                          <th>Nome</th>
-	                                          <th>Cep</th>
-	                                          <th>Rua</th>
-	                                          <th>Cidade</th>
-	                                          <th>Bairro</th>
-	                                          <th>Exluir</th>
-	                                          <th>Editar</th>
-	                                          <th>Fones</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #/ container -->
-        </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-    <div class="footer">
-       <div class="copyright">
-              <p>Copyright &copy; Designed & Developed by Souza Consultória<a href="#"> JDev Treinamento</a> 2020</p>
-        </div>
-    </div>
-    
     <script type="text/javascript">
-    	function validarCampos() {	
-    		if (document.getElementById("login").value ==''){
-    			alert('Campo login está vazio.');
-    			return false;
-    		}
-    		else
-    		if (document.getElementById("senha").value ==''){
-    			alert('Campo senha está vazio.');
-    			return false;
-    		}
-    		else
-    		if (document.getElementById("nome").value ==''){
-    			alert('Campo nome está vazio.');
-    			return false;
-    		}
-    		else
-    		if (document.getElementById("fone").value ==''){
-    			alert('Campo telefone está vazio.');
-    			return false;
-    		}else
-    		return true; 
-    }
-    
-    function consultaCep(){
-    	var cep = $("#cep").val();
-    
-        //Consulta o webservice viacep.com.br/
-        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
-        
-        //alert(dados.logradouro);	
-        	
-        if (!("erro" in dados)) {
-        	//Atualiza os campos com os valores da consulta.
-            $("#rua").val(dados.logradouro);
-            $("#bairro").val(dados.bairro);
-            $("#cidade").val(dados.localidade);
-            $("#estado").val(dados.uf);
-            $("#ibge").val(dados.ibge);
-        } //end if.
-        else {
-          //CEP pesquisado não foi encontrado.
-          alert("CEP não encontrado.");
-          $("#rua").val('');
-          $("#bairro").val('');
-          $("#cidade").val('');
-          $("#uf").val('');
-          $("#ibge").val('');          
-       }
-     });
-   }
-    	
-    </script>
-    
+	    	function validarCampos() {	
+	    		if (document.getElementById("login").value ==''){
+	    			alert('Campo login está vazio.');
+	    			return false;
+	    		}
+	    		else
+	    		if (document.getElementById("senha").value ==''){
+	    			alert('Campo senha está vazio.');
+	    			return false;
+	    		}
+	    		else
+	    		if (document.getElementById("nome").value ==''){
+	    			alert('Campo nome está vazio.');
+	    			return false;
+	    		}
+	    		else
+	    		if (document.getElementById("fone").value ==''){
+	    			alert('Campo telefone está vazio.');
+	    			return false;
+	    		}else
+	    		return true; 
+	    }
+	    
+	    function consultaCep(){
+	    	var cep = $("#cep").val();
+	    
+	        //Consulta o webservice viacep.com.br/
+	        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+	        
+	        //alert(dados.logradouro);	
+	        	
+	        if (!("erro" in dados)) {
+	        	//Atualiza os campos com os valores da consulta.
+	            $("#rua").val(dados.logradouro);
+	            $("#bairro").val(dados.bairro);
+	            $("#cidade").val(dados.localidade);
+	            $("#estado").val(dados.uf);
+	            $("#ibge").val(dados.ibge);
+	        } //end if.
+	        else {
+	          //CEP pesquisado não foi encontrado.
+	          alert("CEP não encontrado.");
+	          $("#rua").val('');
+	          $("#bairro").val('');
+	          $("#cidade").val('');
+	          $("#uf").val('');
+	          $("#ibge").val('');          
+	       }
+	     });
+	   }
+	</script>	
+
     <!--**********************************
         Scripts
     ***********************************-->
@@ -508,7 +413,7 @@
     <script src="resources/js/settings.js"></script>
     <script src="resources/js/gleek.js"></script>
     <script src="resources/js/styleSwitcher.js"></script>
-    <script src="resources/plugins/tables/jquery.dataTables.min.js"></script>    
-    <script src="resources/plugins/tables/datatable-basic.min.js"></script>	
+
   </body>
+
 </html>
