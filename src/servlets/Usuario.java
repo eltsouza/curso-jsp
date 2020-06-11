@@ -238,19 +238,19 @@ public class Usuario extends HttpServlet {
 				String msg = null;
 				
 				if(login == null || login.isEmpty()) {
-					msg = "Login Deve Ser Informado!";
+					msg = "Login deve ser informado!";
 					podeInserir = false;
 				} else if(senha == null || senha.isEmpty()) {
-					msg = "Senha Deve Ser Informada!";
+					msg = "Senha deve ser informada!";
 					podeInserir = false;
 				} else if(nome == null || nome.isEmpty()) {
-					msg = "Nome Deve Ser Informado!";
+					msg = "Nome deve ser informado!";
 					podeInserir = false;
 				} else if(id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
-					request.setAttribute("msg", "Este Login Pertence a Um Usuário!");
+					request.setAttribute("msg", "Este login pertence a um usuário!");
 					podeInserir = false;
 				} else if(id == null || id.isEmpty() && !daoUsuario.validarSenha(senha)) {
-					request.setAttribute("msg", "Esta Senha Pertence a Um Usuário!");
+					request.setAttribute("msg", "Esta senha pertence a um usuário!");
 					podeInserir = false;
 				}
 				
@@ -258,7 +258,7 @@ public class Usuario extends HttpServlet {
 					request.setAttribute("msg", msg);
 				} else if(id == null || id.isEmpty() && daoUsuario.validarLogin(login) && daoUsuario.validarSenha(senha) && podeInserir) {
 					daoUsuario.salvar(usuario);
-					request.setAttribute("msg", "Salvo Com Sucesso!");
+					request.setAttribute("msg", "Usuário cadastrado com sucesso!");
 				}
 				
 				if(id != null && !id.isEmpty() && podeInserir) {
@@ -266,7 +266,7 @@ public class Usuario extends HttpServlet {
 						request.setAttribute("msg", "Login já existe para outro usuário");
 					}else {
 					 daoUsuario.atualizar(usuario);
-     				 request.setAttribute("msg", "Atualizado Com Sucesso!");
+     				 request.setAttribute("msg", "Usuário atualizado com sucesso!");
 					}
 				}
 				

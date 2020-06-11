@@ -25,11 +25,11 @@
 	        ***********************************-->
 	        <div class="nav-header">
 	            <div class="brand-logo">
-	                <a href="index.html">
+	                <a href="acesso-liberado-servlets.jsp">
 	                    <b class="logo-abbr"><img src="#" alt=""> </b>
 	                    <span class="logo-compact"><img src="#" alt=""></span>
 	                    <span class="brand-title">
-	                        <img src="#" alt="">
+	                        <img src="resources/images/index.png" alt="">
 	                    </span>
 	                </a>
 	            </div>
@@ -105,6 +105,7 @@
 	        ***********************************-->
 	        <div class="content-body">
 	            <div class="container-fluid">
+	                <h3 style="color: red">${msg}</h3>
 	                <div class="row justify-content-center">
 	                    <div class="col-lg-12">
 	                        <div class="card">
@@ -112,10 +113,10 @@
 	                                <div class="form-validation">
 										<form class="form-valide" action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false"  enctype="multipart/form-data" >
 										    <div class="form-group row">
-	                                            <label class="col-lg-4 col-form-label" for="id">Código <span class="text-danger">*</span>
+										        <label class="col-lg-4 col-form-label" for="id">Código <span class="text-danger">*</span>
 	                                            </label>
 	                                            <div class="col-lg-6">
-	                                                <input type="text" class="form-control" id="id" name="id" value="${user.id}" placeholder="Código gerado automaticamente..">
+	                                                <input type="text" class="form-control" readonly="readonly" id="id" name="id" value="${user.id}" placeholder="Código gerado automaticamente..">
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
@@ -143,50 +144,49 @@
 	                                            <label class="col-lg-4 col-form-label" for="cep">Cep <span class="text-danger">*</span>
 	                                            </label>
 	                                            <div class="col-lg-6">
-	                                                <input type="text" class="form-control" id="cep" name="cep" onblur="consultaCep();" value="${user.cep}" placeholder="Informe o cep..">
+	                                                <input type="text" class="form-control" id="cep" maxlength="9" name="cep" onblur="consultaCep();" value="${user.cep}" placeholder="Informe o cep..">
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
-	                                            <label class="col-lg-4 col-form-label" for="rua">Rua <span class="text-danger">*</span>
+	                                            <label class="col-lg-4 col-form-label" for="rua">Rua <span class="text-danger"></span>
 	                                            </label>
 	                                            <div class="col-lg-6">
 	                                                <input type="text" class="form-control" id="rua" name="rua" readonly="readonly" value="${user.rua}">
 	                                            </div>
 	                                        </div>										
 	                                        <div class="form-group row">
-	                                            <label class="col-lg-4 col-form-label" for="bairro">Bairro <span class="text-danger">*</span>
+	                                            <label class="col-lg-4 col-form-label" for="bairro">Bairro <span class="text-danger"></span>
 	                                            </label>
 	                                            <div class="col-lg-6">
 	                                                <input type="text" class="form-control" id="bairro" name="bairro" readonly="readonly" value="${user.bairro}">
 	                                            </div>
 	                                        </div>	
 	                                        <div class="form-group row">
-	                                            <label class="col-lg-4 col-form-label" for="cidade">Cidade <span class="text-danger">*</span>
+	                                            <label class="col-lg-4 col-form-label" for="cidade">Cidade <span class="text-danger"></span>
 	                                            </label>
 	                                            <div class="col-lg-6">
 	                                                <input type="text" class="form-control" id="cidade" name="cidade" readonly="readonly" value="${user.cidade}">
 	                                            </div>
 	                                        </div>											
 											<div class="form-group row">
-	                                            <label class="col-lg-4 col-form-label" for="estado">UF <span class="text-danger">*</span>
+	                                            <label class="col-lg-4 col-form-label" for="estado">UF <span class="text-danger"></span>
 	                                            </label>
 	                                            <div class="col-lg-6">
 	                                                <input type="text" class="form-control" id="estado" name="estado" readonly="readonly" value="${user.estado}">
 	                                            </div>
 	                                        </div>	
 											<div class="form-group row">
-	                                            <label class="col-lg-4 col-form-label" for="ibge">IBGE <span class="text-danger">*</span>
+	                                            <label class="col-lg-4 col-form-label" for="ibge">IBGE <span class="text-danger"></span>
 	                                            </label>
 	                                            <div class="col-lg-6">
 	                                                <input type="text" class="form-control" id="ibge" name="ibge" readonly="readonly" value="${user.ibge}">
 	                                            </div>
 	                                        </div>											
 	                                        <div class="form-group row">
-	                                            <label class="col-lg-4 col-form-label" for="val-skill">Perfil<span class="text-danger">*</span>
+	                                            <label class="col-lg-4 col-form-label" for="val-skill">Perfil<span class="text-danger"></span>
 	                                            </label>
 	                                            <div class="col-lg-6">
-	                                                <select id="perfil" name="perfil" class="form-control" id="val-skill" name="val-skill">
-	                                                    <option value="nao_informado">[--Selecione--]</option>
+	                                                <select id="perfil" required=true name="perfil" class="form-control" id="val-skill" name="val-skill">
 	                                                    <option value="admistrador"
 								                          <% 
 								                          	if (request.getAttribute("user") != null) {
@@ -266,7 +266,7 @@
 	                                            </label>
 	                                            <div class="col-lg-8">
 	                                                <label class="css-control css-control-primary css-checkbox" for="ativo">
-	                                                    <input type="checkbox" id="ativo" name="ativo" class="css-control-input" value="1"
+	                                                    <input type="checkbox" checked id="ativo" name="ativo" class="css-control-input" value="1"
 														    <% 
 				                                              if (request.getAttribute("user") != null) {
 				                                              	BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
@@ -286,7 +286,7 @@
 	                                            </label>
 	                                            <div class="col-lg-8">
 	                                                <label class="css-control css-control-primary css-checkbox" for="sexo">
-	                                                    <input type="radio" id="sexo" name="sexo" class="css-control-input" value="masculino" 
+	                                                    <input type="radio" id="sexo" name="sexo" class="css-control-input" checked value="masculino" 
 														   <% 
 						                                   	  if (request.getAttribute("user") != null){
 			  			                                       	BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
@@ -365,8 +365,8 @@
 			                                       <th>Nome</th>
 			                                       <th>Cep</th>
 			                                       <th>Rua</th>
-			                                       <th>Cidade</th>
 			                                       <th>Bairro</th>
+			                                       <th>Cidade</th>
 			                                       <th>Exluir</th>
 			                                       <th>Editar</th>
 			                                       <th>Fones</th>
@@ -386,22 +386,22 @@
 															  </td>
 														  </c:if>	
 														  <c:if test="${user.fotobase64miniatura == null}">
-															  <td><img alt="Imagem User" src="resources/img/userpadrao.png" width="32px" height="32px" onclick="alert('Não possui imagem')"> </td>
+															  <td><img alt="Imagem User" src="resources/images/userpadrao.png" width="32px" height="32px" onclick="alert('Não possui imagem')"> </td>
 														  </c:if>
 														  <c:if test="${user.curriculobase64.isEmpty() == false}">	
-															  <td><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img alt="Curriculo" src="resources/img/pdf.png" width="32px" height="32px"></a></td>
+															  <td><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img alt="Curriculo" src="resources/images/pdf.png" width="32px" height="32px"></a></td>
 														  </c:if>
 														  <c:if test="${user.curriculobase64 == null}">
-															 <td><img alt="Curriculo" src="resources/img/pdfNotFound.png" width="32px" height="32px" onclick="alert('Não possui curriculo')"></td>
+															 <td><img alt="Curriculo" src="resources/images/pdfNotFound.png" width="32px" height="32px" onclick="alert('Não possui curriculo')"></td>
 														  </c:if>
 														  <td><c:out value="${user.nome}"></c:out></td>
 														  <td><c:out value="${user.cep}"></c:out></td>
 														  <td><c:out value="${user.rua}"></c:out></td>
 														  <td><c:out value="${user.bairro}"></c:out></td>
 														  <td><c:out value="${user.cidade}"></c:out></td>
-														  <td><a href="salvarUsuario?acao=delete&user=${user.id}" onclick="return confirm('Confirmar a exclusão?');"><img src="resources/img/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px"></a></td>
-														  <td><a href="salvarUsuario?acao=editar&user=${user.id}"><img src="resources/img/editar.png" alt="Alterar" title="Editar" width="20px" height="20px"></a></td>
-														  <td><a href="salvarTelefones?acao=addFone&user=${user.id}"><img src="resources/img/telefone.png" alt="Telefones" title="Telefones" width="20px" height="20px"></a></td>
+														  <td><a href="salvarUsuario?acao=delete&user=${user.id}" onclick="return confirm('Confirmar a exclusão?');"><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px"></a></td>
+														  <td><a href="salvarUsuario?acao=editar&user=${user.id}"><img src="resources/images/editar.png" alt="Alterar" title="Editar" width="20px" height="20px"></a></td>
+														  <td><a href="salvarTelefones?acao=addFone&user=${user.id}"><img src="resources/images/telefone.png" alt="Telefones" title="Telefones" width="20px" height="20px"></a></td>
 	  	                                              </tr>
 		                                             </c:forEach>
 	                                            <tfoot>

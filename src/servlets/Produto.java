@@ -115,14 +115,14 @@ public class Produto extends HttpServlet {
 				if (codigo == null || codigo.isEmpty() && daoProduto.validarProduto(nome) && podeInserir) {
 					try {
 						daoProduto.salvarProduto(produto);
-						request.setAttribute("msg", "Salvo Com Sucesso!");
+						request.setAttribute("msg", "Produto cadastrado com sucesso!");
 
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 				} else if (codigo != null && !codigo.isEmpty() && podeInserir) {
 					daoProduto.updateProduto(produto);
-					request.setAttribute("msg", "Atualizado Com Sucesso!");
+					request.setAttribute("msg", "Produto atualizado com sucesso!");
 
 				}
 				

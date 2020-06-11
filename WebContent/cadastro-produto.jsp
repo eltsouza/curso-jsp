@@ -9,8 +9,8 @@
 	 <meta name="viewport" content="width=device-width,initial-scale=1">
 	 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	 <title>Cadastro de Produtos</title>
-    <script src="resources/javascript/jquery.min.js" type="text/javascript"></script>
-    <script src="resources/javascript/jquery.maskMoney.min.js" type="text/javascript"></script>
+    <script src="resources/js/jquery.min.js" type="text/javascript"></script>
+    <script src="resources/js/jquery.maskMoney.min.js" type="text/javascript"></script>
     <link href="resources/css/style.css" rel="stylesheet">
   </head>  	
   <body>
@@ -25,11 +25,11 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="#">
+                <a href="acesso-liberado-servlets.jsp">
                     <b class="logo-abbr"><img src="#" alt=""> </b>
                     <span class="logo-compact"><img src="#" alt=""></span>
                     <span class="brand-title">
-                        <img src="#" alt="">
+                        <img src="resources/images/index.png" alt="">
                     </span>
                 </a>
             </div>
@@ -103,6 +103,7 @@
          ***********************************-->
          <div class="content-body">
              <div class="container-fluid">
+                 <h3 style="color: red">${msg}</h3>
                  <div class="row justify-content-center">
                      <div class="col-lg-12">
                          <div class="card">
@@ -110,11 +111,10 @@
                                  <div class="form-validation">
                                    <form class="form-valide" action="salvarProduto" method="post" id="formProduto" onsubmit="return validarCampos() ? true : false">
                                      <div class="form-group row">
-                                             <label class="col-lg-4 col-form-label" for="codigo">Código <span class="text-danger">*</span>
-                                             </label>
-                                             <div class="col-lg-6">
-                                                 <input type="text" class="form-control" readonly="readonly" id="codigo" name="codigo" value="${produto.codigo}" placeholder="Código gerado automaticamente..">
-                                             </div>
+                                         <label class="col-lg-4 col-form-label" for="codigo">Código <span class="text-danger">*</span></label>
+                                           <div class="col-lg-6">
+                                             <input type="text" class="form-control" readonly="readonly" id="codigo" name="codigo" value="${produto.codigo}" placeholder="Código gerado automaticamente..">
+                                           </div>
                                          </div>
                                          <div class="form-group row">
                                              <label class="col-lg-4 col-form-label" for="nome">Produto <span class="text-danger">*</span>
@@ -203,8 +203,8 @@
                                               <td><fmt:formatNumber type="number" maxFractionDigits="1" value="${produto.quantidade}" /></td>
                                               <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${produto.valor}" /></td>
                                               <td><c:out value="${produto.categoria_id}"></c:out></td>
-                                              <td><a href="salvarProduto?acao=delete&produto=${produto.codigo}" onclick="return confirm('Confirmar a exclusão?');"><img src="resources/img/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px"></a></td>
-                                              <td><a href="salvarProduto?acao=editar&produto=${produto.codigo}"><img src="resources/img/editar.png" alt="Alterar" title="Editar" width="20px" height="20px"></a></td>
+                                              <td><a href="salvarProduto?acao=delete&produto=${produto.codigo}" onclick="return confirm('Confirmar a exclusão?');"><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px"></a></td>
+                                              <td><a href="salvarProduto?acao=editar&produto=${produto.codigo}"><img src="resources/images/editar.png" alt="Alterar" title="Editar" width="20px" height="20px"></a></td>
                                               </tr>
                                             </c:forEach>
                                         </tbody>     

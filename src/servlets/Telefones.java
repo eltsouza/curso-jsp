@@ -79,7 +79,7 @@ public class Telefones extends HttpServlet {
 				
 				RequestDispatcher view = request.getRequestDispatcher("/cadastro-telefones.jsp");
 				request.setAttribute("telefones", daoTelefone.listar(beanCursoJsp.getId()));
-				request.setAttribute("msg", "Informe o numero do telefone!");
+				request.setAttribute("msg", "Informe o número do telefone!");
 				view.forward(request, response);
 				
 			}else {
@@ -94,7 +94,7 @@ public class Telefones extends HttpServlet {
 			
 				RequestDispatcher view = request.getRequestDispatcher("/cadastro-telefones.jsp");
 				request.setAttribute("telefones", daoTelefone.listar(beanCursoJsp.getId()));
-				request.setAttribute("msg", "Salvo Com Sucesso!");
+				request.setAttribute("msg", "Telefone cadastrado com sucesso!");
 				view.forward(request, response);
 			
 			}
