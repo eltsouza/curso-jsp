@@ -5,3 +5,5 @@ Sistema desenvolvido com JSP, Servlet, JDBC, Ajax e consumo de WebServer  para c
 
 No front end utilizei JavaScript, CSS e boostrap.
 
+No curso foi ensinado como utilizar as tecnologias. Para chegar a esse resultado final eu procurei encrementar algo a mais para com intuito de praticar e deixar o sistema com a aparência mais amigavel e responsivo.
+
