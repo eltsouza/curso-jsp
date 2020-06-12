@@ -87,8 +87,9 @@
                              <i class="icon-speedometer menu-icon"></i><span class="nav-text">Cadastros</span>
                          </a>
                          <ul aria-expanded="false">
-                             <li><a href="cadastro-usuario.jsp">Usuários</a></li>
-                             <li><a href="cadastro-produto.jsp">Produtos</a></li>        
+	                         <li><a href="cadastro-usuario.jsp">Usuários</a></li>
+	                         <li><a href="cadastro-produto.jsp">Produtos</a></li>
+	                         <li><a href="cadastro-cliente.jsp">Clientes</a></li>
                          </ul>
                      </li>
                  </ul>

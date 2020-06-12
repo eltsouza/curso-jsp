@@ -23,17 +23,17 @@ import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.codec.binary.Base64;
 
-import beans.BeanCursoJsp;
-import dao.DaoUsuario;
+import beans.BeanCliente;
+import dao.DaoCliente;
 
-@WebServlet("/salvarUsuario")
+@WebServlet("/salvarCliente")
 @MultipartConfig
-public class Usuario extends HttpServlet {
+public class Cliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private DaoUsuario daoUsuario = new DaoUsuario();
+	private DaoCliente daoCliente = new DaoCliente();
 
-	public Usuario() {
+	public Cliente() {
 		super();
 	}
 
@@ -45,41 +45,38 @@ public class Usuario extends HttpServlet {
 		try {
 
 			String acao = request.getParameter("acao");
-			String user = request.getParameter("user");
+			String cli = request.getParameter("cliente");
+			BeanCliente beanCliente = new BeanCliente();
 
 			if (acao != null && acao.equalsIgnoreCase("delete")) {
-				daoUsuario.delete(user);
-				RequestDispatcher view = request.getRequestDispatcher("/cadastro-usuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listar());
+				daoCliente.deleteCliente(cli);
+				RequestDispatcher view = request.getRequestDispatcher("/cadastro-cliente.jsp");
+				request.setAttribute("clientes", daoCliente.listar());
 				view.forward(request, response);
 			} else if (acao != null && acao.equalsIgnoreCase("editar")) {
-				BeanCursoJsp beanCursoJsp = daoUsuario.consultar(user);
-				RequestDispatcher view = request.getRequestDispatcher("/cadastro-usuario.jsp");
-				request.setAttribute("user", beanCursoJsp);
+				beanCliente = daoCliente.consultarCliente(cli);
+				RequestDispatcher view = request.getRequestDispatcher("/cadastro-cliente.jsp");
+				request.setAttribute("cli", beanCliente);
 				view.forward(request, response);
 			} else if (acao != null && acao.equalsIgnoreCase("listartodos")) {
-				RequestDispatcher view = request.getRequestDispatcher("/cadastro-usuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listar());
+				RequestDispatcher view = request.getRequestDispatcher("/cadastro-cliente.jsp");
+				request.setAttribute("clientes", daoCliente.listar());
 				view.forward(request, response);
 			} else if (acao != null && acao.equalsIgnoreCase("download")){
-				BeanCursoJsp usuario = daoUsuario.consultar(user);
-				if (usuario != null){
+				beanCliente = daoCliente.consultarCliente(cli);
+				if (beanCliente != null){
 					String contentType = "";
 					byte[] fileBytes = null; 
 					
 					String tipo = request.getParameter("tipo");
 					
 					if (tipo.equalsIgnoreCase("imagem")){
-						contentType = usuario.getContenttype();
-						fileBytes = new Base64().decodeBase64(usuario.getFotobase64());
-					}else if (tipo.equalsIgnoreCase("curriculo")){
-						contentType = usuario.getContenttypecurriculo();
-						fileBytes = new Base64().decodeBase64(usuario.getCurriculobase64());
+						contentType = beanCliente.getContenttype();
+						fileBytes = new Base64().decodeBase64(beanCliente.getFotobase64());
 					}
-					
 					response.setHeader("Content-Disposition", "attachment;filename=arquivo."
-				   + contentType.split("\\/")[1]);
-										
+				   + contentType.split("\\/")[1]);					
+					
 					/*Coloca os bytes em um objeto de entrada para processar*/
 					InputStream is = new ByteArrayInputStream(fileBytes);
 					
@@ -97,8 +94,8 @@ public class Usuario extends HttpServlet {
 					
 				}
 			}else {
-				RequestDispatcher view = request.getRequestDispatcher("/cadastro-usuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listar());
+				RequestDispatcher view = request.getRequestDispatcher("/cadastro-cliente.jsp");
+				request.setAttribute("clientes", daoCliente.listar());
 				view.forward(request, response);
 			}
 		} catch (Exception e) {
@@ -116,8 +113,8 @@ public class Usuario extends HttpServlet {
 		if (acao != null && acao.equalsIgnoreCase("reset")) {
 			try {
 
-				RequestDispatcher view = request.getRequestDispatcher("/cadastro-usuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listar());
+				RequestDispatcher view = request.getRequestDispatcher("/cadastro-cliente.jsp");
+				request.setAttribute("clientes", daoCliente.listar());
 				view.forward(request, response);
 
 			} catch (SQLException e) {
@@ -128,40 +125,29 @@ public class Usuario extends HttpServlet {
 		} else {
 
 			String id = request.getParameter("id");
-			String login = request.getParameter("login");
-			String senha = request.getParameter("senha");
+			String cpf = request.getParameter("cpf");
+			String rg = request.getParameter("rg");
 			String nome = request.getParameter("nome");
-			String fone = request.getParameter("fone");
-			String cep = request.getParameter("cep");
- 	        String rua  = request.getParameter("rua");
-			String bairro = request.getParameter("bairro");
-			String cidade = request.getParameter("cidade");
-			String estado = request.getParameter("estado");
-			String ibge = request.getParameter("ibge");	
+			String profissao = request.getParameter("profissao");
+			String email = request.getParameter("email");
+ 	        String dataNascimento  = request.getParameter("dataNascimento");
 			String sexo = request.getParameter("sexo");
-			String perfil = request.getParameter("perfil");
 
-			BeanCursoJsp usuario = new BeanCursoJsp();
-			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
-			usuario.setLogin(login);
-			usuario.setSenha(senha);
-			usuario.setNome(nome);
-			usuario.setFone(fone);
-			usuario.setCep(cep);
-			usuario.setRua(rua);
-			usuario.setBairro(bairro);
-			usuario.setCidade(cidade);
-			usuario.setEstado(estado);
-			usuario.setIbge(ibge);
-			usuario.setSexo(sexo);
-			usuario.setPerfil(perfil);
-
+			BeanCliente beanCliente = new BeanCliente();
+			beanCliente.setId(!id.isEmpty() ? Long.parseLong(id) : null);
+			beanCliente.setCpf(cpf);
+			beanCliente.setRg(rg);
+			beanCliente.setNome(nome);
+			beanCliente.setProfissao(profissao);
+			beanCliente.setEmail(email);
+			beanCliente.setDataNascimento(dataNascimento);
+			beanCliente.setSexo(sexo);
 			//
 			if (request.getParameter("ativo") != null 
 					&& request.getParameter("ativo").equalsIgnoreCase("on")){
-				usuario.setAtivo(true);
+				beanCliente.setAtivo(true);
 			}else {
-				usuario.setAtivo(false);
+				beanCliente.setAtivo(false);
 			}			
 			try {
 				
@@ -178,8 +164,8 @@ public class Usuario extends HttpServlet {
 						String fotobase64 = new Base64().
 								encodeBase64String(bytesImagem);
 
-						usuario.setFotobase64(fotobase64);
-						usuario.setContenttype(imageFoto.getContentType());
+						beanCliente.setFotobase64(fotobase64);
+						beanCliente.setContenttype(imageFoto.getContentType());
 						
 						/*Inicio miniatura imagem*/
 						 
@@ -198,81 +184,57 @@ public class Usuario extends HttpServlet {
 						  
 						  /*Escrever imagem novamente*/
 						  ByteArrayOutputStream baos = new ByteArrayOutputStream();
-						  ImageIO.write(resizedImage, "png", baos);
-						  
+						  ImageIO.write(resizedImage, "png", baos);					  
 						  
 						  String miniaturaBase64 = "data:image/png;base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
 						
-						  usuario.setFotobase64miniatura(miniaturaBase64);
+						  beanCliente.setFotobase64miniatura(miniaturaBase64);
 						/*Fim miniatura imagem*/
-						
-						
 					}else {
-						usuario.setAtualizarImage(false);
-						//usuario.setFotobase64(request.getParameter("fotoTemp"));
-						//usuario.setContenttype(request.getParameter("contentTypeTemp"));
-					}
-					//processa pdf					
-					Part curriculoPdf = request.getPart("curriculo");
-					
-					if (curriculoPdf != null && curriculoPdf.getInputStream().available() > 0 ) {
-						String curriculoBase64 = new Base64().
-								encodeBase64String(convertStreemToByte(curriculoPdf.getInputStream()));
-
-						usuario.setCurriculobase64(curriculoBase64);
-						usuario.setContenttypecurriculo(curriculoPdf.getContentType());
-					}else {
-						usuario.setAtualizarPdf(false);
-						//usuario.setCurriculobase64(request.getParameter("curriculoTemp"));
-						//usuario.setContenttypecurriculo(request.getParameter("contentTypeCurriculoTemp"));
+						beanCliente.setAtualizarImage(false);
 					}
 				}
 				
-				//Fim - File upload de imagens e pdf
+				//Fim - File upload de imagens
 
 				boolean podeInserir = true;
 				String msg = null;
 				
-				if(login == null || login.isEmpty()) {
-					msg = "Login deve ser informado!";
+				if(nome == null || nome.isEmpty()) {
+					msg = "Nome do cliente ser informado!";
 					podeInserir = false;
-				} else if(senha == null || senha.isEmpty()) {
-					msg = "Senha deve ser informada!";
+				} else if(cpf == null || cpf.isEmpty()) {
+					msg = "Cpf do cliente ser informado!";
 					podeInserir = false;
-				} else if(nome == null || nome.isEmpty()) {
-					msg = "Nome deve ser informado!";
+				} else if(rg == null || rg.isEmpty()) {
+					msg = "Rg do cliente ser informado!";
 					podeInserir = false;
-				} else if(id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
-					request.setAttribute("msg", "Este login pertence a um usuário!");
+				} else if(id == null || id.isEmpty() && !daoCliente.validarCpfDuplicado(cpf)) {
+					msg = "Este CPF já pertence a um cliente!";
 					podeInserir = false;
-				} else if(id == null || id.isEmpty() && !daoUsuario.validarSenha(senha)) {
-					request.setAttribute("msg", "Esta senha pertence a um usuário!");
-					podeInserir = false;
-				}
-				
+				} 
 				if(msg != null) {
 					request.setAttribute("msg", msg);
-				} else if(id == null || id.isEmpty() && daoUsuario.validarLogin(login) && daoUsuario.validarSenha(senha) && podeInserir) {
-					daoUsuario.salvar(usuario);
-					request.setAttribute("msg", "Usuário cadastrado com sucesso!");
+				} else if(id == null || id.isEmpty() && daoCliente.validarCpfDuplicado(cpf) && podeInserir) {
+					daoCliente.salvarCliente(beanCliente);
+					request.setAttribute("msg", "Cliente cadastrado com sucesso!");
 				}
 				
 				if(id != null && !id.isEmpty() && podeInserir) {
-					if (!daoUsuario.validarLoginUpdate(login, id)){
-						request.setAttribute("msg", "Login já existe para outro usuário");
+					if (!daoCliente.validarCpfUpdate(cpf, id)){
+						request.setAttribute("msg", "CPF já existe para outro cliente!");
 					}else {
-					 daoUsuario.atualizar(usuario);
-     				 request.setAttribute("msg", "Usuário atualizado com sucesso!");
+					 daoCliente.atualizarCliente(beanCliente);
+     				 request.setAttribute("msg", "Cliente atualizado com sucesso!");
 					}
 				}
 				
 				if(!podeInserir) {
-					request.setAttribute("user", usuario);
+					request.setAttribute("cli", beanCliente);
 				}
 				
-				RequestDispatcher view = request.getRequestDispatcher("/cadastro-usuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listar());
-				//request.setAttribute("msg", "Salvo Com Sucesso!");
+				RequestDispatcher view = request.getRequestDispatcher("/cadastro-cliente.jsp");
+				request.setAttribute("clientes", daoCliente.listar());
 				view.forward(request, response);
 			} catch(Exception e) {
 				e.printStackTrace();

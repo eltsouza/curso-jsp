@@ -8,9 +8,9 @@
 		<link rel="stylesheet" type="text/css"  href="resources/css/acesso.css"/>
 	</head>
 	<body>
-	    <a href="index-servlets.jsp"><img src="resources/img/logout.png" align="left" alt="Logout" title="Logout" width="40px" height="40px"></a>
+	    <a href="index-servlets.jsp"><img src="resources/images/logout.png" align="left" alt="Logout" title="Logout" width="40px" height="40px"></a>
 		<h2>Acesso negado ao sistema</h2>
-		<img src="resources/img/acessoNegado.png" alt="Negado" width=300 height=200>
+		<img src="resources/images/acessoNegado.png" alt="Negado" width=300 height=200>
 		
 	    <br><br><br><br><br><br><br><br><br><br><br><br><br>
        	<p>Sistema desenvolvido - Souza Consultoria TI</p>
