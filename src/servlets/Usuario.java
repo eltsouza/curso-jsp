@@ -23,7 +23,7 @@ import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.codec.binary.Base64;
 
-import beans.BeanCursoJsp;
+import beans.BeanUsuario;
 import dao.DaoUsuario;
 
 @WebServlet("/salvarUsuario")
@@ -53,16 +53,16 @@ public class Usuario extends HttpServlet {
 				request.setAttribute("usuarios", daoUsuario.listar());
 				view.forward(request, response);
 			} else if (acao != null && acao.equalsIgnoreCase("editar")) {
-				BeanCursoJsp beanCursoJsp = daoUsuario.consultar(user);
+				BeanUsuario beanUsuario = daoUsuario.consultar(user);
 				RequestDispatcher view = request.getRequestDispatcher("/cadastro-usuario.jsp");
-				request.setAttribute("user", beanCursoJsp);
+				request.setAttribute("user", beanUsuario);
 				view.forward(request, response);
 			} else if (acao != null && acao.equalsIgnoreCase("listartodos")) {
 				RequestDispatcher view = request.getRequestDispatcher("/cadastro-usuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listar());
 				view.forward(request, response);
 			} else if (acao != null && acao.equalsIgnoreCase("download")){
-				BeanCursoJsp usuario = daoUsuario.consultar(user);
+				BeanUsuario usuario = daoUsuario.consultar(user);
 				if (usuario != null){
 					String contentType = "";
 					byte[] fileBytes = null; 
@@ -141,7 +141,7 @@ public class Usuario extends HttpServlet {
 			String sexo = request.getParameter("sexo");
 			String perfil = request.getParameter("perfil");
 
-			BeanCursoJsp usuario = new BeanCursoJsp();
+			BeanUsuario usuario = new BeanUsuario();
 			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
 			usuario.setLogin(login);
 			usuario.setSenha(senha);

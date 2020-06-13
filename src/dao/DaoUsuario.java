@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import beans.BeanCursoJsp;
+import beans.BeanUsuario;
 import connection.SingleConnection;
 
 public class DaoUsuario {
@@ -19,7 +19,7 @@ public class DaoUsuario {
 
 	}
 	// criando o metodo para salvar os registros no banco de dados
-	public void salvar(BeanCursoJsp usuario) throws SQLException {
+	public void salvar(BeanUsuario usuario) throws SQLException {
 		try {
 			String sql = "insert into usuario(login,senha,nome,telefone,cep,rua,bairro,cidade,estado,ibge,fotobase64,contenttype,curriculobase64,contenttypecurriculo,fotobase64miniatura,ativo,sexo,perfil) " 
 					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -56,48 +56,48 @@ public class DaoUsuario {
 	 */
 	
 	
-	public List<BeanCursoJsp> listar (String descricaoconsulta) throws SQLException{
+	public List<BeanUsuario> listar (String descricaoconsulta) throws SQLException{
 		String sql = "SELECT * FROM usuario where login <> 'admin' and nome like '%"+descricaoconsulta+"%'";
 		return consultarUsuarios(sql);
 	}
 	
 	
-	public List<BeanCursoJsp> listar() throws Exception {
+	public List<BeanUsuario> listar() throws Exception {
 		String sql = "SELECT * FROM usuario where login <> 'admin'";
 		return consultarUsuarios(sql);
 	}
 
-	private List<BeanCursoJsp> consultarUsuarios(String sql)
+	private List<BeanUsuario> consultarUsuarios(String sql)
 			throws SQLException {
-		List<BeanCursoJsp> listar = new ArrayList<BeanCursoJsp>();
+		List<BeanUsuario> listar = new ArrayList<BeanUsuario>();
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
 		while (resultSet.next()) {
-			BeanCursoJsp beanCursoJsp = new BeanCursoJsp();
-			beanCursoJsp.setId(resultSet.getLong("id"));
-			beanCursoJsp.setLogin(resultSet.getString("login"));
-			beanCursoJsp.setSenha(resultSet.getString("senha"));
-			beanCursoJsp.setNome(resultSet.getString("nome"));
-			beanCursoJsp.setFone(resultSet.getString("telefone"));
-			beanCursoJsp.setCep(resultSet.getString("cep"));
-			beanCursoJsp.setRua(resultSet.getString("rua"));
-			beanCursoJsp.setBairro(resultSet.getString("bairro"));
-			beanCursoJsp.setCidade(resultSet.getString("cidade"));
-			beanCursoJsp.setEstado(resultSet.getString("estado"));
-			beanCursoJsp.setIbge(resultSet.getString("ibge"));
-			beanCursoJsp.setContenttype(resultSet.getString("contenttype"));
+			BeanUsuario beanUsuario = new BeanUsuario();
+			beanUsuario.setId(resultSet.getLong("id"));
+			beanUsuario.setLogin(resultSet.getString("login"));
+			beanUsuario.setSenha(resultSet.getString("senha"));
+			beanUsuario.setNome(resultSet.getString("nome"));
+			beanUsuario.setFone(resultSet.getString("telefone"));
+			beanUsuario.setCep(resultSet.getString("cep"));
+			beanUsuario.setRua(resultSet.getString("rua"));
+			beanUsuario.setBairro(resultSet.getString("bairro"));
+			beanUsuario.setCidade(resultSet.getString("cidade"));
+			beanUsuario.setEstado(resultSet.getString("estado"));
+			beanUsuario.setIbge(resultSet.getString("ibge"));
+			beanUsuario.setContenttype(resultSet.getString("contenttype"));
 			// beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64"));
-			beanCursoJsp.setFotobase64miniatura(resultSet
+			beanUsuario.setFotobase64miniatura(resultSet
 					.getString("fotobase64miniatura"));
-			beanCursoJsp.setCurriculobase64(resultSet
+			beanUsuario.setCurriculobase64(resultSet
 					.getString("curriculobase64"));
-			beanCursoJsp.setContenttypecurriculo(resultSet
+			beanUsuario.setContenttypecurriculo(resultSet
 					.getString("contenttypecurriculo"));
 			
-			beanCursoJsp.setAtivo(resultSet.getBoolean("ativo"));
-			beanCursoJsp.setSexo(resultSet.getString("sexo"));
-			beanCursoJsp.setPerfil(resultSet.getString("perfil"));
-			listar.add(beanCursoJsp);
+			beanUsuario.setAtivo(resultSet.getBoolean("ativo"));
+			beanUsuario.setSexo(resultSet.getString("sexo"));
+			beanUsuario.setPerfil(resultSet.getString("perfil"));
+			listar.add(beanUsuario);
 		}
 		
 		return listar;
@@ -122,7 +122,7 @@ public class DaoUsuario {
 		
 	}
 
-	public BeanCursoJsp consultar(String id){
+	public BeanUsuario consultar(String id){
 
 		try {
 			String sql = "select * from usuario where id = '" + id + "' and login <> 'admin'";
@@ -132,27 +132,27 @@ public class DaoUsuario {
 			
 			if (resultset.next()){
 				
-				BeanCursoJsp beanCursoJsp = new BeanCursoJsp();
-				beanCursoJsp.setId(resultset.getLong("id"));
-				beanCursoJsp.setLogin(resultset.getString("login"));
-				beanCursoJsp.setSenha(resultset.getString("senha"));
-				beanCursoJsp.setNome(resultset.getString("nome"));
-                beanCursoJsp.setFone(resultset.getString("telefone"));
-                beanCursoJsp.setCep(resultset.getString("cep"));
-                beanCursoJsp.setRua(resultset.getString("rua"));
-                beanCursoJsp.setBairro(resultset.getString("bairro"));
-                beanCursoJsp.setCidade(resultset.getString("cidade"));
-                beanCursoJsp.setEstado(resultset.getString("estado"));
-                beanCursoJsp.setIbge(resultset.getString("ibge"));          
-                beanCursoJsp.setFotobase64(resultset.getString("fotobase64"));
-                beanCursoJsp.setFotobase64miniatura(resultset.getString("fotobase64miniatura"));
-                beanCursoJsp.setContenttype(resultset.getString("contenttype"));
-                beanCursoJsp.setCurriculobase64(resultset.getString("curriculobase64"));
-                beanCursoJsp.setContenttypecurriculo(resultset.getString("contenttypecurriculo"));
-    			beanCursoJsp.setAtivo(resultset.getBoolean("ativo"));
-    			beanCursoJsp.setSexo(resultset.getString("sexo"));
-    			beanCursoJsp.setPerfil(resultset.getString("perfil"));
-				return beanCursoJsp;
+				BeanUsuario beanUsuario = new BeanUsuario();
+				beanUsuario.setId(resultset.getLong("id"));
+				beanUsuario.setLogin(resultset.getString("login"));
+				beanUsuario.setSenha(resultset.getString("senha"));
+				beanUsuario.setNome(resultset.getString("nome"));
+                beanUsuario.setFone(resultset.getString("telefone"));
+                beanUsuario.setCep(resultset.getString("cep"));
+                beanUsuario.setRua(resultset.getString("rua"));
+                beanUsuario.setBairro(resultset.getString("bairro"));
+                beanUsuario.setCidade(resultset.getString("cidade"));
+                beanUsuario.setEstado(resultset.getString("estado"));
+                beanUsuario.setIbge(resultset.getString("ibge"));          
+                beanUsuario.setFotobase64(resultset.getString("fotobase64"));
+                beanUsuario.setFotobase64miniatura(resultset.getString("fotobase64miniatura"));
+                beanUsuario.setContenttype(resultset.getString("contenttype"));
+                beanUsuario.setCurriculobase64(resultset.getString("curriculobase64"));
+                beanUsuario.setContenttypecurriculo(resultset.getString("contenttypecurriculo"));
+    			beanUsuario.setAtivo(resultset.getBoolean("ativo"));
+    			beanUsuario.setSexo(resultset.getString("sexo"));
+    			beanUsuario.setPerfil(resultset.getString("perfil"));
+				return beanUsuario;
 			}
 			
 		} catch (SQLException e) {
@@ -243,9 +243,9 @@ public class DaoUsuario {
 	 * Método atualizar() Método Responsável Por Atualizar os Dados (UPDATE) no
 	 * BD
 	 * 
-	 * @param BeanCursoJsp usuario = Objeto usuario da Classe BeanCursoJsp
+	 * @param BeanUsuario usuario = Objeto usuario da Classe BeanUsuario
 	 */
-	public void atualizar(BeanCursoJsp usuario) {
+	public void atualizar(BeanUsuario usuario) {
 		try {
 			StringBuilder sql = new StringBuilder();
 
@@ -323,7 +323,7 @@ public class DaoUsuario {
 			}
 		}
 	}
-/*	public void atualizar(BeanCursoJsp usuario) {
+/*	public void atualizar(BeanUsuario usuario) {
 
 	   try {
 			//String sql = "update usuario " + "set login = ?" + "where id   = " + usuario.getId();

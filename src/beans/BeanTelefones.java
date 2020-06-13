@@ -6,6 +6,7 @@ public class BeanTelefones {
 	private String numero;
 	private String tipo;
 	private Long  usuario;
+	private Long  cliente;
 	
 	public Long getId() {
 		return id;
@@ -31,5 +32,11 @@ public class BeanTelefones {
 	public void setUsuario(Long usuario) {
 		this.usuario = usuario;
 	}
+	public Long getCliente() {
+		return cliente;
+	}
+	public void setCliente(Long cliente) {
+		this.cliente = cliente;
+	}	
 	
 }

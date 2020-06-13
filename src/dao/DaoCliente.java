@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import beans.BeanCliente;
-import beans.BeanCursoJsp;
+import beans.BeanUsuario;
 import connection.SingleConnection;
 
 public class DaoCliente {
@@ -178,7 +178,7 @@ public class DaoCliente {
 	 * Método atualizar() Método Responsável Por Atualizar os Dados (UPDATE) no
 	 * BD
 	 * 
-	 * @param BeanCursoJsp usuario = Objeto usuario da Classe BeanCursoJsp
+	 * @param BeanUsuario usuario = Objeto usuario da Classe BeanUsuario
 	 */
 	public void atualizarCliente(BeanCliente cliente) {
 		try {
@@ -223,7 +223,7 @@ public class DaoCliente {
 			}
 		}
 	}
-/*	public void atualizar(BeanCursoJsp usuario) {
+/*	public void atualizar(BeanUsuario usuario) {
 
 	   try {
 			//String sql = "update usuario " + "set login = ?" + "where id   = " + usuario.getId();

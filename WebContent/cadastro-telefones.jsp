@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="beans.BeanUsuario"%>
+<%@page import="beans.BeanCliente"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -110,25 +112,25 @@
                              <div class="card-body">
                                  <div class="form-validation">
                                      <form class="form-valide" action="salvarTelefones" method="post" id="formUser" onsubmit="return validarCampos() ? true : false">
-                                     <div class="form-group row">
-                                         <label class="col-lg-4 col-form-label" for="id">Id <span class="text-danger">*</span></label>
-                                           <div class="col-lg-6">
-                                             <input type="text" class="form-control" readonly="readonly" id="id" name="id" value="${userEscolhido.id}">
-                                           </div>
+                                         <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="id">Id <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                              <input type="text" class="form-control" readonly="readonly" id="id" name="id" value="${pessoaEscolhida.id}">
+                                            </div>
                                          </div>
                                          <div class="form-group row">
-                                             <label class="col-lg-4 col-form-label" for="usuario">Usuário <span class="text-danger">*</span>
-                                             </label>
-                                             <div class="col-lg-6">
-                                                 <input type="text" class="form-control" readonly="readonly" id="usuario" name="usuario" value="${userEscolhido.nome}">
-                                             </div>
+                                            <label class="col-lg-4 col-form-label" for="usuario">Usuário <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                               <input type="text" class="form-control" readonly="readonly" id="usuario" name="usuario" value="${pessoaEscolhida.nome}">
+                                            </div>
                                          </div>
                                          <div class="form-group row">
-                                             <label class="col-lg-4 col-form-label" for="numero">Número <span class="text-danger">*</span>
-                                             </label>
-                                             <div class="col-lg-6">
-                                                 <input type="text" class="form-control" id="numero" name="numero" placeholder="Informe o número de telefone..">
-                                             </div>
+                                            <label class="col-lg-4 col-form-label" for="numero">Número <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" id="numero" name="numero" placeholder="Informe o número de telefone..">
+                                            </div>
                                          </div>
                                          <div class="form-group row">
                                              <label class="col-lg-4 col-form-label" for="tipo">Tipo:<span class="text-danger">*</span>
@@ -144,7 +146,7 @@
                                          </div>
                                          <div class="form-group row">
                                              <div class="col-lg-8 ml-auto">
-                                               <input type="submit"class="btn btn-primary" value="Salvar"> 
+                                               <input type="submit"class="btn btn-primary" value="Salvar">
                                                <input type="submit"class="btn btn-primary" value="Voltar" onclick="document.getElementById('formUser').action = 'salvarUsuario?acao=reset'">											
                                              </div>
                                          </div>
@@ -163,8 +165,8 @@
          <!--**********************************
                 Content body start
          ***********************************-->
-        <div class="content-body-produto">
-            <div class="container-fluid-produto">
+        <div class="content-body-telefone">
+            <div class="container-fluid-telefone">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -184,10 +186,10 @@
                                           <!-- Loop pra listar os telefones cadastrados na tela -->
                                           <c:forEach items="${telefones}" var="fone">
                                             <tr>
-                                              <td><c:out value="${fone.id}"></c:out></td>
+                                              <td style="width:100px"><c:out value="${fone.id}"></c:out></td>
                                               <td><c:out value="${fone.numero}"></c:out></td>
-                                              <td><c:out value="${fone.tipo}"></c:out></td>
-                                         	  <td><a href="salvarTelefones?acao=deleteFone&foneId=${fone.id}" onclick="return confirm('Confirmar a exclusão?');"><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px"></a></td>
+                                              <td style="width:100px"><c:out value="${fone.tipo}"></c:out></td>
+                                         	  <td style="width:100px"><a href="salvarTelefones?acao=deleteFone&fonePessoa=${fone.id}&cliente=${fone.cliente}" onclick="return confirm('Confirmar a exclusão?');"><center><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px" align="middle"></center></a></td>
                                             </tr>
                                           </c:forEach>
                                         </tbody>     

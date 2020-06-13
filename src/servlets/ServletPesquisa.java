@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.BeanCliente;
-import beans.BeanCursoJsp;
+import beans.BeanUsuario;
 import dao.DaoCliente;
 import dao.DaoUsuario;
 
@@ -35,7 +35,7 @@ public class ServletPesquisa extends HttpServlet {
 					request.setAttribute("clientes", listaPesquisa);
 					view.forward(request, response);					
 				}else{
-					List<BeanCursoJsp> listaPesquisa = daoUsuario.listar(descricaoPesquisa);					
+					List<BeanUsuario> listaPesquisa = daoUsuario.listar(descricaoPesquisa);					
 					RequestDispatcher view = request.getRequestDispatcher("/cadastro-usuario.jsp");
 					request.setAttribute("usuarios", listaPesquisa);
 					view.forward(request, response);

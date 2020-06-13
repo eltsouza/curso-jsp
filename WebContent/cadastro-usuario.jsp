@@ -1,4 +1,4 @@
-<%@page import="beans.BeanCursoJsp"%>
+<%@page import="beans.BeanUsuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -191,7 +191,7 @@
 								                          <% 
 								                          	if (request.getAttribute("user") != null) {
 								                          				
-								                          		BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+								                          		BeanUsuario user = (BeanUsuario) request.getAttribute("user");
 								                          		if (user.getPerfil().equalsIgnoreCase("admistrador")){
 								                          			out.print(" ");
 								                          			out.print("selected=\"selected\"");
@@ -205,7 +205,7 @@
 								                          <% 
 								                          	if (request.getAttribute("user") != null) {
 								                          				
-								                          		BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+								                          		BeanUsuario user = (BeanUsuario) request.getAttribute("user");
 								                          		if (user.getPerfil().equalsIgnoreCase("secretario")){
 								                          			out.print(" ");
 								                          			out.print("selected=\"selected\"");
@@ -219,7 +219,7 @@
 								                          <% 
 								                          	if (request.getAttribute("user") != null) {
 								                          				
-								                          		BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+								                          		BeanUsuario user = (BeanUsuario) request.getAttribute("user");
 								                          		if (user.getPerfil().equalsIgnoreCase("gerente")){
 								                          			out.print(" ");
 								                          			out.print("selected=\"selected\"");
@@ -234,7 +234,7 @@
 								                          <% 
 								                          	if (request.getAttribute("user") != null) {
 								                          				
-								                          		BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+								                          		BeanUsuario user = (BeanUsuario) request.getAttribute("user");
 								                          		if (user.getPerfil().equalsIgnoreCase("funcionario")){
 								                          			out.print(" ");
 								                          			out.print("selected=\"selected\"");
@@ -269,7 +269,7 @@
 	                                                    <input type="checkbox" checked id="ativo" name="ativo" class="css-control-input" value="1"
 														    <% 
 				                                              if (request.getAttribute("user") != null) {
-				                                              	BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+				                                            	  BeanUsuario user = (BeanUsuario) request.getAttribute("user");
 				                                              	if (user.isAtivo()){
 				                                              		out.print(" ");
 				                                              		out.print("checked=\"checked\"");
@@ -289,7 +289,7 @@
 	                                                    <input type="radio" id="sexo" name="sexo" class="css-control-input" checked value="masculino" 
 														   <% 
 						                                   	  if (request.getAttribute("user") != null){
-			  			                                       	BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+						                                   		BeanUsuario user = (BeanUsuario) request.getAttribute("user");
 						                                   		if (user.getSexo().equalsIgnoreCase("masculino")){
 						                                   			out.print(" ");
 						                                   			out.print("checked=\"checked\"");
@@ -302,7 +302,7 @@
 	                                                    <input type="radio" id="sexo" name="sexo" class="css-control-input" value="feminino" 
 						                                   <% 
 						                                   	if (request.getAttribute("user") != null){
-						                                   	   BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+						                                   	   BeanUsuario user = (BeanUsuario) request.getAttribute("user");
 						                                   	   if (user.getSexo().equalsIgnoreCase("feminino")){
 						                                   		  out.print(" ");
 						                                   		  out.print("checked=\"checked\"");
@@ -337,6 +337,7 @@
 			  	<table>
 				  <tr>
 					<td>Nome</td>
+					<td><input type="text" hidden id="usuario" name="cliente" value="usuario"></td>
 					<td><input type="text"  id="descricaoconsulta" name="descricaoconsulta"></td>
 					<td><input type="submit" value="Pesquisar"></td>
 				  </tr>

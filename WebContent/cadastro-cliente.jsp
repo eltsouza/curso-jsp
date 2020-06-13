@@ -172,16 +172,19 @@
 	                                            </label>
 	                                            <div class="col-lg-8">
 	                                                <label class="css-control css-control-primary css-checkbox" for="ativo">
-	                                                    <input type="checkbox" checked id="ativo" name="ativo" class="css-control-input"
-                                                           <c:forEach items="${clientes}" var="cli">
-	   	                                                     <c:if test="${cli.isAtivo()}">														  
-														       <%out.print(" ");
-				                                              	 out.print("checked=\"checked\"");
-				                                              	 out.print(" "); %>
-														     </c:if>	
-		                                                   </c:forEach>
-				                                        >										
-													<span class="css-control-indicator"></span>Ativar ou desativar usuário?</label>													
+	                                                    <input type="checkbox" checked id="ativo" name="ativo" class="css-control-input" value="1"
+														    <% 
+				                                              if (request.getAttribute("cli") != null) {
+				                                              	BeanCliente user = (BeanCliente) request.getAttribute("cli");
+				                                              	if (user.isAtivo()){
+				                                              		out.print(" ");
+				                                              		out.print("checked=\"checked\"");
+				                                              		out.print(" ");
+				                                              	}
+				                                              }						 
+				                                           %> 
+				                                         >										
+													<span class="css-control-indicator"></span>Ativar ou desativar cliente?</label>													
 	                                            </div>
 	                                        </div>
 	                                        <div class="form-group row">
@@ -190,27 +193,33 @@
 	                                            <div class="col-lg-8">
 	                                                <label class="css-control css-control-primary css-checkbox" for="sexo">
 	                                                    <input type="radio" id="sexo" name="sexo" class="css-control-input" checked value="masculino" 
-                                                           <c:forEach items="${clientes}" var="cli">
-	   	                                                     <c:if test="${cli.sexo == 'masculino'}">	   	                                                     														  
-														       <%out.print(" ");
-				                                              	 out.print("checked=\"checked\"");
-				                                              	 out.print(" "); %>
-														     </c:if>	
-		                                                   </c:forEach>
+														   <% 
+						                                   	  if (request.getAttribute("cli") != null){
+					                                              	BeanCliente cli = (BeanCliente) request.getAttribute("cli");
+						                                   		if (cli.getSexo().equalsIgnoreCase("masculino")){
+						                                   			out.print(" ");
+						                                   			out.print("checked=\"checked\"");
+						                                   			out.print(" ");
+						                                   		}
+						                                   	}
+						                                  %>
 						                                >	
 														<span class="css-control-indicator"></span>Masculino</label>
 	                                                    <input type="radio" id="sexo" name="sexo" class="css-control-input" value="feminino" 
-                                                           <c:forEach items="${clientes}" var="cli">
-	   	                                                     <c:if test="${cli.sexo == 'feminino'}">	   	                                                     														  
-														       <%out.print(" ");
-				                                              	 out.print("checked=\"checked\"");
-				                                              	 out.print(" "); %>
-														     </c:if>	
-		                                                   </c:forEach>
-						                                >
+						                                   <% 
+						                                   	if (request.getAttribute("cli") != null){
+				                                              	BeanCliente cli = (BeanCliente) request.getAttribute("cli");
+						                                   	   if (cli.getSexo().equalsIgnoreCase("feminino")){
+						                                   		  out.print(" ");
+						                                   		  out.print("checked=\"checked\"");
+						                                   		  out.print(" ");
+						                                   	   }
+						                                      }
+						                                   %>													   
+						                                >   
 													<span class="css-control-indicator"></span>Feminino</label>
 	                                            </div>
-	                                        </div>		                                        	
+	                                        </div>		
 	                                        <div class="form-group row">
 	                                            <div class="col-lg-8 ml-auto">
 							                        <input type="submit"class="btn btn-primary" value="Salvar"> 
@@ -288,7 +297,7 @@
 														  <c:if test="${cli.fotobase64miniatura == null}">
 															  <td><img alt="Imagem Cliente" src="resources/images/userpadrao.png" width="32px" height="32px" onclick="alert('Não possui imagem')"> </td>
 														  </c:if>
-														  <td><a href="salvarTelefones?acao=addFone&cliente=${cli.id}"><img src="resources/images/telefone.png" alt="Telefones" title="Telefones" width="20px" height="20px"></a></td>
+														  <td><a href="salvarTelefones?acao=addFoneCliente&cliente=${cli.id}"><img src="resources/images/telefone.png" alt="Telefones" title="Telefones" width="20px" height="20px"></a></td>
 														  <td><a href="salvarEnderecos?acao=addEndereco&cliente=${cli.id}"><img src="resources/images/endereco.png" alt="Telefones" title="Telefones" width="20px" height="20px"></a></td>
 														  <td><a href="salvarCliente?acao=delete&cliente=${cli.id}" onclick="return confirm('Confirmar a exclusão?');"><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px"></a></td>
 														  <td><a href="salvarCliente?acao=editar&cliente=${cli.id}"><img src="resources/images/editar.png" alt="Alterar" title="Editar" width="20px" height="20px"></a></td>
