@@ -189,7 +189,12 @@
                                               <td style="width:100px"><c:out value="${fone.id}"></c:out></td>
                                               <td><c:out value="${fone.numero}"></c:out></td>
                                               <td style="width:100px"><c:out value="${fone.tipo}"></c:out></td>
-                                         	  <td style="width:100px"><a href="salvarTelefones?acao=deleteFone&fonePessoa=${fone.id}&cliente=${fone.cliente}" onclick="return confirm('Confirmar a exclusão?');"><center><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px" align="middle"></center></a></td>
+											  <c:if test="${fone.cliente == null}">
+                                           	     <td style="width:100px"><a href="salvarTelefones?acao=deleteFone&fonePessoa=${fone.id}&cliente=${fone.usuario}" onclick="return confirm('Confirmar a exclusão?');"><center><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px" align="middle"></center></a></td>
+											  </c:if>                                              
+											  <c:if test="${fone.usuario == null}">
+                                           	     <td style="width:100px"><a href="salvarTelefones?acao=deleteFone&fonePessoa=${fone.id}&cliente=${fone.cliente}" onclick="return confirm('Confirmar a exclusão?');"><center><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px" align="middle"></center></a></td>
+											  </c:if>                                              
                                             </tr>
                                           </c:forEach>
                                         </tbody>     

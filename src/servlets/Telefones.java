@@ -72,7 +72,7 @@ public class Telefones extends HttpServlet {
 					daoTelefone.deleteTelefone(foneId);
 					RequestDispatcher view = request.getRequestDispatcher("/cadastro-telefones.jsp");
 					request.setAttribute("pessoaEscolhida", beanCliente);
-					request.setAttribute("telefones", daoTelefone.listar(Long.parseLong(user),tipoPessoa));
+					request.setAttribute("telefones", daoTelefone.listar(Long.parseLong(cli),tipoPessoa));
 					request.setAttribute("msg", "Telefone excluído com sucesso!");
 					view.forward(request, response);
 				}		
