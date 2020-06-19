@@ -368,9 +368,9 @@
 			                                       <th>Rua</th>
 			                                       <th>Bairro</th>
 			                                       <th>Cidade</th>
+			                                       <th>Fone</th>
 			                                       <th>Exluir</th>
 			                                       <th>Editar</th>
-			                                       <th>Fones</th>
 	                                            </tr>
 	                                        </thead>
 	                                        <tbody>
@@ -400,9 +400,9 @@
 														  <td><c:out value="${user.rua}"></c:out></td>
 														  <td><c:out value="${user.bairro}"></c:out></td>
 														  <td><c:out value="${user.cidade}"></c:out></td>
-														  <td><a href="salvarUsuario?acao=delete&user=${user.id}" onclick="return confirm('Confirmar a exclusão?');"><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px"></a></td>
-														  <td><a href="salvarUsuario?acao=editar&user=${user.id}"><img src="resources/images/editar.png" alt="Alterar" title="Editar" width="20px" height="20px"></a></td>
-														  <td><a href="salvarTelefones?acao=addFone&user=${user.id}"><img src="resources/images/telefone.png" alt="Telefones" title="Telefones" width="20px" height="20px"></a></td>
+														  <td><a href="salvarTelefones?acao=addFone&user=${user.id}"><center><img src="resources/images/telefone.png" alt="Telefones" title="Telefones" width="20px" height="20px" lign="middle"></center></a></td>
+														  <td><a href="salvarUsuario?acao=delete&user=${user.id}" onclick="return confirm('Confirmar a exclusão?');"><center><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px" align="middle"></center></a></td>
+														  <td><a href="salvarUsuario?acao=editar&user=${user.id}"><center><img src="resources/images/editar.png" alt="Editar" title="Editar" width="20px" height="20px" align="middle"></center></a></td>
 	  	                                              </tr>
 		                                             </c:forEach>
 	                                            <tfoot>

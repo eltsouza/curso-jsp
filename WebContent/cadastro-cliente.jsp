@@ -265,15 +265,15 @@
 	                                    <table class="table table-striped table-bordered zero-configuration">
 	                                        <thead>
 	                                            <tr>
+			                                       <th>Nome</th>
 			                                       <th>CPF</th>
 			                                       <th>RG</th>
-			                                       <th>Nome</th>
 			                                       <th>Profissão</th>
 			                                       <th>Email</th>
 			                                       <th>Data Nascimento</th>
 			                                       <th>Foto</th>
-			                                       <th>Fones</th>
-			                                       <th>Endereços</th>
+			                                       <th>Fone</th>
+			                                       <th>End</th>
 			                                       <th>Exluir</th>
 			                                       <th>Editar</th>
 	                                            </tr>
@@ -281,9 +281,9 @@
 	                                        <tbody>
 		                                        <c:forEach items="${clientes}" var="cli">
 	   	                                              <tr>
+														  <td><c:out value="${cli.nome}"></c:out></td>
 														  <td><c:out value="${cli.cpf}"></c:out></td>
 														  <td><c:out value="${cli.rg}"></c:out></td>
-														  <td><c:out value="${cli.nome}"></c:out></td>
 														  <td><c:out value="${cli.profissao}"></c:out></td>
 														  <td><c:out value="${cli.email}"></c:out></td>
 														  <td><c:out value="${cli.dataNascimento}"></c:out></td>
@@ -297,17 +297,17 @@
 														  <c:if test="${cli.fotobase64miniatura == null}">
 															  <td><img alt="Imagem Cliente" src="resources/images/userpadrao.png" width="32px" height="32px" onclick="alert('Não possui imagem')"> </td>
 														  </c:if>
-														  <td><a href="salvarTelefones?acao=addFoneCliente&cliente=${cli.id}"><img src="resources/images/telefone.png" alt="Telefones" title="Telefones" width="20px" height="20px"></a></td>
-														  <td><a href="salvarEnderecos?acao=addEndereco&cliente=${cli.id}"><img src="resources/images/endereco.png" alt="Telefones" title="Telefones" width="20px" height="20px"></a></td>
-														  <td><a href="salvarCliente?acao=delete&cliente=${cli.id}" onclick="return confirm('Confirmar a exclusão?');"><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px"></a></td>
-														  <td><a href="salvarCliente?acao=editar&cliente=${cli.id}"><img src="resources/images/editar.png" alt="Alterar" title="Editar" width="20px" height="20px"></a></td>
+														  <td><a href="salvarTelefones?acao=addFoneCliente&cliente=${cli.id}"><center><img src="resources/images/telefone.png" alt="Telefones" title="Telefones" width="20px" height="20px" align="middle"></center></a></td>
+														  <td><a href="salvarEnderecos?acao=addEnderecoCliente&cliente=${cli.id}"><center><img src="resources/images/endereco.png" alt="Enderecos" title="Endereços" width="30px" height="30px" align="middle"></center></a></td>
+														  <td><a href="salvarCliente?acao=delete&cliente=${cli.id}" onclick="return confirm('Confirmar a exclusão?');"><center><img src="resources/images/excluir.png" alt="Excluir" title="Excluir" width="20px" height="20px" align="middle"></center></a></td>
+														  <td><a href="salvarCliente?acao=editar&cliente=${cli.id}"><center><img src="resources/images/editar.png" alt="Editar" title="Editar" width="20px" height="20px" align="middle"></center></a></td>
 	  	                                              </tr>
 		                                          </c:forEach>
 	                                            <tfoot>
 	                                              <tr>
+			                                       <th>Nome</th>
 			                                       <th>CPF</th>
 			                                       <th>RG</th>
-			                                       <th>Nome</th>
 			                                       <th>Profissão</th>
 			                                       <th>Email</th>
 			                                       <th>Data Nascimento</th>

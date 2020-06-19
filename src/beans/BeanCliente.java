@@ -16,15 +16,7 @@ public class BeanCliente {
 	private boolean atualizarImage = true;
 	private boolean ativo;
 	private String sexo;
-	private String origem;//variavel para controle
 	
-	
-	public String getOrigem() {
-		return origem;
-	}
-	public void setOrigem(String origem) {
-		this.origem = origem;
-	}
 	public Long getId() {
 		return id;
 	}

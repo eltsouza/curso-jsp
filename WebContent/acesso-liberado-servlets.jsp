@@ -20,8 +20,8 @@
       	</tr>
       </table>
     </center>
-	<p>Sistema de cadastro com: JavaEE + JDBC + JSP + PostgreSQL</p>
+	<p>Sistema de cadastro com: JavaEE + JDBC + JSP + PostgreSQL + Consumo de WebService</p>
     <br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <p>Sistema desenvolvido - Souza Consultoria TI</p>
+    <p>Copyright &copy; Designed & Developed by Souza Consultoria<a href="#"> JDev Treinamento</a> 2020</p>
   </body>
 </html>
